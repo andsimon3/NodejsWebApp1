@@ -1,0 +1,2 @@
+C:\Users\simon\source\repos\NodejsWebApp1\NodejsWebApp1\obj\Release\WatchTogether.njsproj.CoreCompileInputs.cache
+C:\Users\simon\source\repos\NodejsWebApp1\NodejsWebApp1\bin\Microsoft.NodejsTools.WebRole.dll

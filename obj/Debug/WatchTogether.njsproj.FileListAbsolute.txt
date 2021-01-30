@@ -1,0 +1,3 @@
+C:\Users\simon\source\repos\NodejsWebApp1\NodejsWebApp1\obj\Debug\WatchTogether.njsprojAssemblyReference.cache
+C:\Users\simon\source\repos\NodejsWebApp1\NodejsWebApp1\obj\Debug\WatchTogether.njsproj.CoreCompileInputs.cache
+C:\Users\simon\source\repos\NodejsWebApp1\NodejsWebApp1\bin\Microsoft.NodejsTools.WebRole.dll

@@ -1,0 +1,12 @@
+.down_up{
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: inherit;
+}
+.control_down{
+    flex-direction: column;
+}
+.up_space{
+    flex-grow:1;
+}
