@@ -1,0 +1,14 @@
+.Video {
+    vertical-align: middle;
+    width: 100vw;
+    height: calc(100vw * 9 / 16);
+    display: flex;
+    background-color: black;
+    color: antiquewhite;
+    overflow: hidden;
+}
+.Video_video {
+    height: inherit;
+    margin: auto;
+    object-fit: contain;
+}

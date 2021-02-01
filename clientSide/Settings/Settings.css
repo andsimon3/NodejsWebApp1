@@ -1,0 +1,51 @@
+.main_Settings{
+    display: none;
+    position: absolute;
+    height: 60vh;
+    width: inherit;
+    bottom: 0;
+    LATERanimation: goUp 1s;
+    z-index: 10;
+    color: black;
+    background-color: antiquewhite;
+    border-radius: 3rem 3rem 0 0;
+}
+@keyframes goUp{
+    0%{
+        bottom: -60%;
+    }
+    100%{
+        bottom: 0;
+    }
+}
+.Settings_header{
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+.Settings_header h1{
+    margin: 0 0 0 1rem;
+}
+.header_space{
+    flex-grow:1;
+}
+.Settings_menu{
+    display: flex;
+    flex-direction: row;
+    height: 3rem;
+    width:inherit;
+    background-color: aliceblue;
+}
+.Settings_menu button{
+    flex-grow:1;
+}
+    .Settings_menu div {
+        margin: auto;
+    }
+.Settings_main{
+    height: calc(60%-8rem);
+    width: inherit;
+}

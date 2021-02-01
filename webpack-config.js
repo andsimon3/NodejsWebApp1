@@ -3,7 +3,7 @@ module.exports = {
     entry: "./app.tsx",
     mode: "development",
     output: {
-        filename: "./app-bundle.js"
+        filename: "../public/dist/app-bundle.js"
     },
     resolve: {
         extensions: ['.Webpack.js', '.web.js', '.ts', '.js', '.jsx', '.tsx']

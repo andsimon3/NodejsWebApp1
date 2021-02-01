@@ -1,0 +1,7 @@
+.control_settings {
+    height: inherit !important;
+    margin: 0 0.5rem !important;
+}
+.control_settings div{
+    padding: 0 !important;
+}
