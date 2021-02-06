@@ -14,7 +14,7 @@ app.use(express.static(staticPath));
 
 // Allows you to set port in the project properties.
 app.set('port', process.env.PORT || 3000);
-
+//!
 const wss = new WebSocket.Server({
     noServer: true
 });
