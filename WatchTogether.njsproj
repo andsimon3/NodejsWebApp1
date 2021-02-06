@@ -45,6 +45,12 @@
     <Content Include="clientSide\Settings\_video\video.css" />
     <Content Include="clientSide\videoPlayer\videoPlayer.css" />
     <Content Include="clientSide\videoPlayer\_control\control.css" />
+    <Content Include="public\dist\app-bundle.js" />
+    <Content Include="public\dist\app-bundle.js.map" />
+    <Content Include="public\index.html" />
+    <Content Include="public\src\1min.mp4" />
+    <Content Include="public\src\logo.ai" />
+    <Content Include="public\src\logo.svg" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -68,6 +74,9 @@
     <Folder Include="clientSide\Settings\_video\" />
     <Folder Include="clientSide\videoPlayer\" />
     <Folder Include="clientSide\videoPlayer\_control\" />
+    <Folder Include="public\" />
+    <Folder Include="public\dist\" />
+    <Folder Include="public\src\" />
     <Folder Include="serverSide\" />
   </ItemGroup>
   <ItemGroup>
