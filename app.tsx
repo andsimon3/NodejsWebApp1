@@ -8,62 +8,36 @@ import { Set1 } from './clientSide/room/start';
 import { Chat } from './clientSide/room/chat';
 import '@vkontakte/vkui/dist/vkui.css';
 import './clientSide/app.css';
-import { socketContext } from './clientSide/context'
+import { serverListener } from './clientSide/serverListener';
+import { observer } from "mobx-react"
 
-export class Main extends React.Component<{}, { window }> {
-    //websocketReady = false;
-    //socket = new WebSocket("wss://user49056293-amuj4q4k.wormhole.vk-apps.com");
-    constructor(props) {
-        super(props);
-        this.state = {
-            window: undefined
-        };
-        /*
-        this.socket.onopen = (e) => {
-            this.setState({ window: <Set1 /> });
-            this.websocketReady = true;
-            let qs = window.location.search.substr(1);
-            let auth = {
-                type: 'auth',
-                param: qs,
-            }
-            this.socket.send(JSON.stringify(auth));
-        };
-        this.socket.onmessage = (e) => {
-            console.log(e);
-            let message = JSON.parse(e.data);
-            console.log(message);
-            switch(message.type){
-                case 'alert':
-                    alert(message.data);
-                    break;
-                case 'joining':
-                    alert(message.users + ' ' + message.roomId)
-                    this.setState({ window: <Chat roomId={message.roomId} /> })
-                    break;
-			}
-        };
-        this.socket.onclose = (e) => { console.log('ooops'); }
-        */
-    }
-    componentDidMount() {
+export const Main = observer(() => {
+    const [window, setWindow] = React.useState(<div>Wait...</div>);
+    React.useEffect(() => {
+        console.log(serverListener);
         //bridge.subscribe((e) => console.log(e));
         bridge.send("VKWebAppInit", {});
         //let socket = new WebSocket("ws://localhost:1337");
-    }
-    render() {
-        return (
-            <div className='main vkui__root'>
-                    <Header />
-                    {this.websocketReady ? 
-                    <div>
-                    <Video />
-                    {this.state.window}</div>:
-                    <div>Wait...</div>
-                    }
-            </div>
-        );//ConnectSettings
-    }
-}
+
+        console.log(serverListener.state);
+        switch (serverListener.state) {
+            case 'connected':
+                setWindow(<Set1 />);
+                break;
+            case 'joined':
+                setWindow(<Chat roomId={serverListener.roomId} />);
+                break;
+        }
+    })
+    return (
+        <div className='main vkui__root'>
+            <Header />
+            <Video />
+            {window}
+        </div>
+    );//ConnectSettings
+
+})
+
 
 ReactDOM.render(<Main />, document.getElementById('root'));

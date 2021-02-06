@@ -14,7 +14,7 @@ app.use(express.static(staticPath));
 
 // Allows you to set port in the project properties.
 app.set('port', process.env.PORT || 3000);
-//!
+
 const wss = new WebSocket.Server({
     noServer: true
 });
@@ -23,7 +23,7 @@ var rooms = {};
 var users = {};
 
 wss.on('connection', (ws) => {
-    console.log('user connected. Online: ' + wss.clients);
+    console.log('user connected.');
     let id = setTimeout(() => { ws.close(); }, 5000);
     //connection is up, let's add a simple simple event
     ws.on('message', (event) => {
@@ -93,7 +93,7 @@ wss.on('connection', (ws) => {
             case 'play':
                 answer = {
                     type: 'play',
-                    data: message.data,
+                    //data: message.data,
                 }
                 rooms[ws.room].users.forEach((userId) => { users[userId].send(JSON.stringify(answer)) })
                 break;

@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Down } from './../../control/_down/down';
 import { PlayButton } from './../../control/_playButton/playButton';
 import { Icon24Replay10, Icon24Forward10 } from '@vkontakte/icons';
-import { socketContext } from '../../context';
 
 export class Control extends React.Component<{}, { timerId: number}> {
     constructor(props) {
