@@ -33,6 +33,18 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="clientSide\app.css" />
+    <Content Include="clientSide\control\_down\down.css" />
+    <Content Include="clientSide\control\_fullscreen\fullscreen.css" />
+    <Content Include="clientSide\control\_playButton\playButton.css" />
+    <Content Include="clientSide\control\_progress\progress.css" />
+    <Content Include="clientSide\control\_settings\settings.css" />
+    <Content Include="clientSide\control\_timer\timer.css" />
+    <Content Include="clientSide\header\header.css" />
+    <Content Include="clientSide\Settings\Settings.css" />
+    <Content Include="clientSide\Settings\_video\video.css" />
+    <Content Include="clientSide\videoPlayer\videoPlayer.css" />
+    <Content Include="clientSide\videoPlayer\_control\control.css" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -42,7 +54,41 @@
     <Content Include="serverSide\signCheck.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="clientSide\" />
+    <Folder Include="clientSide\control\" />
+    <Folder Include="clientSide\control\_down\" />
+    <Folder Include="clientSide\control\_fullscreen\" />
+    <Folder Include="clientSide\control\_playButton\" />
+    <Folder Include="clientSide\control\_progress\" />
+    <Folder Include="clientSide\control\_settings\" />
+    <Folder Include="clientSide\control\_timer\" />
+    <Folder Include="clientSide\header\" />
+    <Folder Include="clientSide\room\" />
+    <Folder Include="clientSide\Settings\" />
+    <Folder Include="clientSide\Settings\_video\" />
+    <Folder Include="clientSide\videoPlayer\" />
+    <Folder Include="clientSide\videoPlayer\_control\" />
     <Folder Include="serverSide\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app.tsx" />
+    <TypeScriptCompile Include="clientSide\context.tsx" />
+    <TypeScriptCompile Include="clientSide\control\_down\down.tsx" />
+    <TypeScriptCompile Include="clientSide\control\_fullscreen\fullscreen.tsx" />
+    <TypeScriptCompile Include="clientSide\control\_playButton\playButton.tsx" />
+    <TypeScriptCompile Include="clientSide\control\_progress\progress.tsx" />
+    <TypeScriptCompile Include="clientSide\control\_settings\settings.tsx" />
+    <TypeScriptCompile Include="clientSide\control\_timer\timer.tsx" />
+    <TypeScriptCompile Include="clientSide\header\header.tsx" />
+    <TypeScriptCompile Include="clientSide\room\chat.tsx" />
+    <TypeScriptCompile Include="clientSide\room\start.tsx" />
+    <TypeScriptCompile Include="clientSide\Settings\Settings.tsx" />
+    <TypeScriptCompile Include="clientSide\Settings\_video\video.tsx" />
+    <TypeScriptCompile Include="clientSide\videoPlayer\serverListener.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="clientSide\videoPlayer\videoPlayer.tsx" />
+    <TypeScriptCompile Include="clientSide\videoPlayer\_control\control.tsx" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

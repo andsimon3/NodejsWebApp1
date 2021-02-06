@@ -23,6 +23,7 @@ var rooms = {};
 var users = {};
 
 wss.on('connection', (ws) => {
+    console.log('user connected. Online: ' + wss.clients);
     let id = setTimeout(() => { ws.close(); }, 5000);
     //connection is up, let's add a simple simple event
     ws.on('message', (event) => {
@@ -40,6 +41,7 @@ wss.on('connection', (ws) => {
                     ws.vkId = vkId;
                     ws.on('close', (e) => {
                         delete users[vkId];
+                        console.log('user disconnected. Online: ' + users);
                     });
                 }
                 break;
@@ -70,8 +72,7 @@ wss.on('connection', (ws) => {
                     rooms[message.roomId].users.push(ws.vkId);
                     ws.on('close', (e) => {
                         delete rooms[message.roomId];
-                    });
-                
+                    });                
                 answer = {
                     type: 'joining',
                     roomId: message.roomId,
@@ -89,7 +90,7 @@ wss.on('connection', (ws) => {
                 }
                 rooms[ws.room].users.forEach((userId) => { users[userId].send(JSON.stringify(answer)) })
                 break;
-            case 'message':
+            case 'play':
                 answer = {
                     type: 'play',
                     data: message.data,

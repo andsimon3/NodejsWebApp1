@@ -3,7 +3,7 @@ import './playButton.css';
 import * as React from 'react';
 import { IconButton, Spinner } from '@vkontakte/vkui';
 import { Icon48Play, Icon48Pause } from '@vkontakte/icons';
-import { socketContext } from '../../context'
+import { socketContext } from '../../context';
 
 export class PlayButton extends React.Component<{}, {icon: any}> {
     constructor(props) {
@@ -13,11 +13,11 @@ export class PlayButton extends React.Component<{}, {icon: any}> {
         };
     }
     static contextType = socketContext;
-    componentDidMount() {/*
+    componentDidMount() {
         let socket = this.context;
         console.log(socket);
         const videoPlayer = document.getElementById('videosrc') as HTMLMediaElement;
-        socket.onmessage((event) => {
+        socket.onmessage = (event) => {
             let message = JSON.parse(event.data);
             switch (message.type) {
                 case 'play':
@@ -25,9 +25,7 @@ export class PlayButton extends React.Component<{}, {icon: any}> {
                     if (message.data == 'pause') { videoPlayer.pause() };
                     break;
             }
-        });*/
-        const videoPlayer = document.getElementById('videosrc') as HTMLMediaElement;
-        const playButton = document.getElementById('playButton') as any;
+        };
         videoPlayer.addEventListener('play', (e) => { this.setState({ icon: <Icon48Pause /> }); });
         videoPlayer.addEventListener('playing', (e) => { this.setState({ icon: <Icon48Pause /> }); });
         videoPlayer.addEventListener('pause', (e) => { this.setState({ icon: <Icon48Play /> }); });
@@ -35,21 +33,21 @@ export class PlayButton extends React.Component<{}, {icon: any}> {
         videoPlayer.addEventListener('waiting', (e) => { this.setState({ icon: <Spinner /> }); });
     }
     render() {
+        const videoPlayer = document.getElementById('videosrc') as HTMLMediaElement;
+        let socket = this.context;
         function PlayButton(e: React.MouseEvent) {
-            let socket = this.context;
-            const videoPlayer = document.getElementById('videosrc') as HTMLMediaElement;
             let sendMes = {
                 type: 'play',
                 data: videoPlayer.paused ? 'play' : 'pause',
 			}
-            this.socket.send
+            socket.send(JSON.stringify(sendMes));
             function changePlay() {
                 if (videoPlayer.paused) { videoPlayer.play(); } else { videoPlayer.pause();}
             }
             changePlay();
         }
         return (
-            <IconButton id='playButton' className='control_playButton' onClick={PlayButton} icon={this.state.icon} />
+            <IconButton id='playButton' className='control_playButton' onClick={PlayButton.bind(this)} icon={this.state.icon} />
         )
     }
 }

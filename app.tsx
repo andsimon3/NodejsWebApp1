@@ -10,51 +10,57 @@ import '@vkontakte/vkui/dist/vkui.css';
 import './clientSide/app.css';
 import { socketContext } from './clientSide/context'
 
-export class Main extends React.Component<{}, { socket, window }> {
+export class Main extends React.Component<{}, { window }> {
+    //websocketReady = false;
+    //socket = new WebSocket("wss://user49056293-amuj4q4k.wormhole.vk-apps.com");
     constructor(props) {
         super(props);
         this.state = {
-            socket: {} as WebSocket,
-            window: <Set1 />,
+            window: undefined
         };
-    }
-    componentDidMount() {
-        //bridge.subscribe((e) => console.log(e));
-        bridge.send("VKWebAppInit", {});
-        //let socket = new WebSocket("ws://localhost:1337");
-        let socket = new WebSocket("wss://user49056293-znl6c6sy.wormhole.vk-apps.com/");
-        
-        this.setState({ socket: socket });
-        socket.onopen = (e) => {
+        /*
+        this.socket.onopen = (e) => {
+            this.setState({ window: <Set1 /> });
+            this.websocketReady = true;
             let qs = window.location.search.substr(1);
             let auth = {
                 type: 'auth',
                 param: qs,
             }
-            socket.send(JSON.stringify(auth));
-            };
-        socket.onmessage = (event) => {
-            let message = JSON.parse(event.data);
+            this.socket.send(JSON.stringify(auth));
+        };
+        this.socket.onmessage = (e) => {
+            console.log(e);
+            let message = JSON.parse(e.data);
+            console.log(message);
             switch(message.type){
                 case 'alert':
                     alert(message.data);
                     break;
                 case 'joining':
                     alert(message.users + ' ' + message.roomId)
-                    this.setState({ window: <Chat /> })
+                    this.setState({ window: <Chat roomId={message.roomId} /> })
                     break;
 			}
         };
-        socket.onclose = (e) => { console.log('ooops'); }
+        this.socket.onclose = (e) => { console.log('ooops'); }
+        */
+    }
+    componentDidMount() {
+        //bridge.subscribe((e) => console.log(e));
+        bridge.send("VKWebAppInit", {});
+        //let socket = new WebSocket("ws://localhost:1337");
     }
     render() {
         return (
             <div className='main vkui__root'>
-                <socketContext.Provider value={this.state.socket }>
                     <Header />
+                    {this.websocketReady ? 
+                    <div>
                     <Video />
-                    {this.state.window}
-                </socketContext.Provider>
+                    {this.state.window}</div>:
+                    <div>Wait...</div>
+                    }
             </div>
         );//ConnectSettings
     }
