@@ -7,7 +7,7 @@ export class Progress extends React.Component {
         let progressLine = document.getElementById('progressLine');
         let videoPlayer = document.getElementById('videosrc') as HTMLMediaElement;
         let lineNow = document.getElementById('lineNow');
-        progressLine.addEventListener('mousedown', (e) => {
+        progressLine!.addEventListener('mousedown', (e) => {
             let x = e.offsetX;
             let percent = x / progressLine.getBoundingClientRect().width;
             lineNow.style.width = (percent*100) + '%';

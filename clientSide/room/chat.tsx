@@ -1,6 +1,5 @@
 declare var require: any
 import * as React from 'react';
-import { socketContext } from '../context'
 
 export class Chat extends React.Component<{roomId}, { messages }> {
     constructor(props) {
@@ -9,15 +8,13 @@ export class Chat extends React.Component<{roomId}, { messages }> {
             messages: [],
 		}
 	}
-    static contextType = socketContext;
     render() {
-        let socket = this.context;
-        function send() {
+        function send() { }/*
             let answer = {
                 type: 'message',
                 data: (document.getElementById('test') as HTMLInputElement).value,
             }
-            socket.send(JSON.stringify(answer));
+            //socket.send(JSON.stringify(answer));
         }
         socket.onmessage = (event) => {
             let message = JSON.parse(event.data);
@@ -26,11 +23,11 @@ export class Chat extends React.Component<{roomId}, { messages }> {
                     this.setState({ messages: [...this.state.messages, message.data] });
                     break;
             };
-        }
+        }*/
         return (
             <div>
                 <p>{this.props.roomId}</p><br/>
-                <div>{this.state.messages.join('\n ')}</div>
+                <div>{/*this.state.messages.join('\n ')*/}</div>
                 <input type='text' name='room_code' id='test' />
                 <button onClick={(e) => send()}>Go</button>
             </div>
