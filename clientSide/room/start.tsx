@@ -1,5 +1,6 @@
 declare var require: any
 import * as React from 'react';
+import { serverListener } from './../serverListener';
 
 export class Set1 extends React.Component<{}, {}> {
     render() {
@@ -7,6 +8,7 @@ export class Set1 extends React.Component<{}, {}> {
             let text = {
                 type: 'create',
             }
+            serverListener.send(JSON.stringify(text));
             //socket.send(JSON.stringify(text));
         }
         function joinRoom() {
@@ -14,6 +16,7 @@ export class Set1 extends React.Component<{}, {}> {
                 type: 'join',
                 roomId: (document.getElementById('test') as HTMLInputElement).value
             }
+            serverListener.send(JSON.stringify(text));
             //socket.send(JSON.stringify(text));
         }
 

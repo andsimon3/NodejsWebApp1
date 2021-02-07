@@ -8,27 +8,26 @@ import { Set1 } from './clientSide/room/start';
 import { Chat } from './clientSide/room/chat';
 import '@vkontakte/vkui/dist/vkui.css';
 import './clientSide/app.css';
-import { serverListener } from './clientSide/serverListener';
-import { observer } from "mobx-react"
+import { serverListener, serverListenerClass } from './clientSide/serverListener';
+import { observer } from "mobx-react-lite"
 
-export const Main = observer(() => {
-    const [window, setWindow] = React.useState(<div>Wait...</div>);
-    React.useEffect(() => {
-        console.log(serverListener);
+export const Main = observer(({ sListener }: {sListener: serverListenerClass}) => {
+    let window;
+    /*React.useEffect(() => {
         //bridge.subscribe((e) => console.log(e));
-        bridge.send("VKWebAppInit", {});
-        //let socket = new WebSocket("ws://localhost:1337");
-
-        console.log(serverListener.state);
-        switch (serverListener.state) {
-            case 'connected':
-                setWindow(<Set1 />);
-                break;
-            case 'joined':
-                setWindow(<Chat roomId={serverListener.roomId} />);
-                break;
-        }
-    })
+        //bridge.send("VKWebAppInit", {});
+    });*/
+    switch (sListener.state) {
+        case 'connected':
+            window = <Set1 />;
+            break;
+        case 'joined':
+            window = <Chat roomId={sListener.roomId} />;
+            break;
+        default:
+            window = <div>Wait...</div> 
+            break;
+    }
     return (
         <div className='main vkui__root'>
             <Header />
@@ -40,4 +39,4 @@ export const Main = observer(() => {
 })
 
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(<Main sListener={serverListener} />, document.getElementById('root'));
