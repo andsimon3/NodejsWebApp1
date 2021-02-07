@@ -92,6 +92,9 @@
     <TypeScriptCompile Include="clientSide\mainState.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="clientSide\room.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="clientSide\room\chat.tsx" />
     <TypeScriptCompile Include="clientSide\room\start.tsx" />
     <TypeScriptCompile Include="clientSide\Settings\Settings.tsx" />
