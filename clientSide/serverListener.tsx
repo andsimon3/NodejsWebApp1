@@ -1,19 +1,31 @@
-import { makeAutoObservable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
-let ws = new WebSocket("wss://user49056293-amuj4q4k.wormhole.vk-apps.com");
+let ws = new WebSocket("wss://user49056293-xao4ybo5.wormhole.vk-apps.com/");
 
 
-//export
-class serverListenerClass {
-    socket
-    state
-    roomId
+export
+    class serverListenerClass {
+    socket = undefined;
+    state = 'not started';
+    roomId = undefined;
     constructor() {
-        makeAutoObservable(this);
-        this.state = 'not started';
+        makeObservable(this, {
+            state: observable,
+            roomId: observable,
+            setState: action/*,
+            listen: computed,
+            connect: computed,
+            send: computed*/
+        });
         this.socket = ws;
+        this.connect();
+    }
+    setState(newState: string) {
+        this.state = newState;
+	}
+    connect() {
         this.socket.onopen = (e) => {
-            this.state = 'connected';
+            this.setState('connected');
             this.listen();
             let qs = window.location.search.substr(1);
             let auth = {
@@ -24,7 +36,7 @@ class serverListenerClass {
         };
         this.socket.onclose = (e) => {
             console.log('ooops');
-            this.state = 'disconnected';
+            this.setState('disconnected');
         }
 	}
     listen() {
@@ -38,20 +50,16 @@ class serverListenerClass {
                     break;
                 case 'joining':
                     alert(message.users + ' ' + message.roomId)
-                    this.state = 'joined';
+                    this.setState('joined');
                     this.roomId = message.roomId;
                     //this.setState({ window: <Chat roomId={message.roomId} /> })
                     break;
             }
         };
-	}
-    sendPlay() {
-        let sendMes = {
-            type: 'play',
-            //data: videoPlayer.paused ? 'play' : 'pause',
-        }
-        this.socket.send(JSON.stringify(sendMes));
-        console.log(123);
+    }
+    send(mes: string) {
+        this.socket.send(mes);
+        console.log(mes);
     }
 }
 
