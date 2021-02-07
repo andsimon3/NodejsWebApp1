@@ -49,7 +49,7 @@ export class roomClass {
 
 export let room = new roomClass;
 /*
-Описание объектов
+Описание объектов:
 
 room:{
 		users: [str(num(access) . num(id))],
