@@ -1,4 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx';
+import { room } from './room';
 
 let ws = new WebSocket("wss://user49056293-xao4ybo5.wormhole.vk-apps.com/");
 
@@ -7,11 +8,9 @@ export
     class serverListenerClass {
     socket = undefined;
     state = 'not started';
-    roomId = undefined;
     constructor() {
         makeObservable(this, {
             state: observable,
-            roomId: observable,
             setState: action/*,
             listen: computed,
             connect: computed,
@@ -41,18 +40,25 @@ export
 	}
     listen() {
         this.socket.onmessage = (e) => {
-            console.log(e);
             let message = JSON.parse(e.data);
             console.log(message);
             switch (message.type) {
-                case 'alert':
-                    alert(message.data);
+                case 'auth':
+                    console.log(message.data);
                     break;
                 case 'joining':
-                    alert(message.users + ' ' + message.roomId)
+                    console.log(message.users + ' in room #' + message.roomId)
                     this.setState('joined');
-                    this.roomId = message.roomId;
-                    //this.setState({ window: <Chat roomId={message.roomId} /> })
+                    room.setRoomId(message.roomId);
+                    break;
+                case 'newMember':
+                    room.newMember(message.newOne, message.members);
+                    break;
+                case 'error':
+                    alert('ERROR: ' + message.code + ' ' + message.text);
+                    break;
+                case 'newMessage':
+                    room.getChat(message.data);
                     break;
             }
         };

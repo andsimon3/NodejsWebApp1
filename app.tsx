@@ -9,6 +9,7 @@ import { Chat } from './clientSide/room/chat';
 import '@vkontakte/vkui/dist/vkui.css';
 import './clientSide/app.css';
 import { serverListener, serverListenerClass } from './clientSide/serverListener';
+import { room, roomClass } from './clientSide/room';
 import { observer } from "mobx-react-lite"
 
 export const Main = observer(({ sListener }: {sListener: serverListenerClass}) => {
@@ -22,7 +23,13 @@ export const Main = observer(({ sListener }: {sListener: serverListenerClass}) =
             window = <Set1 />;
             break;
         case 'joined':
-            window = <Chat roomId={sListener.roomId} />;
+            window = <Chat />;
+            break;
+        case 'disconected':
+            window = <div>Ooops</div>
+            break;
+        case 'reconnecting':
+            window = <div>Reconnect...</div>
             break;
         default:
             window = <div>Wait...</div> 

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { IconButton, Spinner } from '@vkontakte/vkui';
 import { Icon48Play, Icon48Pause } from '@vkontakte/icons';
 import { serverListener } from './../../serverListener';
+import { room } from './../../room';
 
 
 export class PlayButton extends React.Component<{}, {icon: any}> {
@@ -24,7 +25,7 @@ export class PlayButton extends React.Component<{}, {icon: any}> {
     render() {
         const videoPlayer = document.getElementById('videosrc') as HTMLMediaElement;
         function PlayButton(e: React.MouseEvent) {
-            //serverListener.sendPlay();
+            room.sendPlay();
             function changePlay() {
                 if (videoPlayer.paused) { videoPlayer.play(); } else { videoPlayer.pause();}
             }

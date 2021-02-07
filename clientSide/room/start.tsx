@@ -9,7 +9,6 @@ export class Set1 extends React.Component<{}, {}> {
                 type: 'create',
             }
             serverListener.send(JSON.stringify(text));
-            //socket.send(JSON.stringify(text));
         }
         function joinRoom() {
             let text = {
@@ -17,7 +16,6 @@ export class Set1 extends React.Component<{}, {}> {
                 roomId: (document.getElementById('test') as HTMLInputElement).value
             }
             serverListener.send(JSON.stringify(text));
-            //socket.send(JSON.stringify(text));
         }
 
 	return (

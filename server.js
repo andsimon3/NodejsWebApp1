@@ -36,7 +36,7 @@ wss.on('connection', (ws) => {
                 if ((vkId != null) & !(vkId in users)) {//in prod null to 0 
                     clearTimeout(id);
                     users[vkId] = ws;
-                    users[vkId].send(JSON.stringify({ type: 'alert', data: vkId }));
+                    users[vkId].send(JSON.stringify({ type: 'auth', data: vkId }));
                     ws.newFunc = () => { ws.send(1); }
                     ws.vkId = vkId;
                     ws.on('close', (e) => {
@@ -72,16 +72,28 @@ wss.on('connection', (ws) => {
                     rooms[message.roomId].users.push(ws.vkId);
                     ws.on('close', (e) => {
                         delete rooms[message.roomId];
-                    });                
-                answer = {
-                    type: 'joining',
-                    roomId: message.roomId,
-                    users: rooms[message.roomId].users,
-                    role: 'guest'
-                    };
+                    });
                     ws.room = message.roomId;
+                    answer = {
+                        type: 'joining',
+                        roomId: ws.room,
+                        users: rooms[ws.room].users,
+                        role: 'guest'
+                    };
                     ws.send(JSON.stringify(answer));
-                }
+                    answer = {
+                        type: 'newMember',
+                        members: rooms[ws.room].users,
+                        newOne: ws.vkId
+                    }
+                    rooms[ws.room].users.forEach((userId) => { users[userId].send(JSON.stringify(answer)) })
+                } else {
+                    answer = {
+                        type: 'error',
+                        code: 0,
+                        text: 'No rooms with that ID'
+					}
+				}
                 break;
             case 'message':
                 answer = {
